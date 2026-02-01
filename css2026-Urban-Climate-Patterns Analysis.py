@@ -1,13 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
+# Set page configuration
 st.set_page_config(
     page_title="Urban Climate Research Dashboard",
     layout="wide"
 )
 
+# Clean styling with black background
 st.markdown("""
 <style>
     .stApp {
@@ -24,7 +25,6 @@ st.markdown("""
         border-radius: 15px;
         margin-bottom: 30px;
         border-left: 10px solid #006400;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     
     .section-header {
@@ -54,7 +54,6 @@ st.markdown("""
         border: 2px solid #006400;
         margin: 15px 0;
         color: #ffffff;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     }
     
     .hypothesis-box {
@@ -64,7 +63,6 @@ st.markdown("""
         border: 2px solid #1e90ff;
         margin: 15px 0;
         color: #ffffff;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     }
     
     .methodology-box {
@@ -74,7 +72,6 @@ st.markdown("""
         border: 2px solid #ff8c00;
         margin: 15px 0;
         color: #ffffff;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     }
     
     .stButton > button {
@@ -108,36 +105,15 @@ st.markdown("""
         font-weight: bold;
     }
     
+    p, li, h4, h3, h2, h1 {
+        color: #ffffff !important;
+    }
+    
     .stDataFrame {
         background-color: #222222;
         color: white;
         border-radius: 10px;
         border: 1px solid #006400;
-    }
-    
-    .stSelectbox label, .stMultiselect label, .stSlider label {
-        color: #ffffff !important;
-        font-weight: 600;
-    }
-    
-    .stTabs [data-baseweb="tab-list"] {
-        background-color: #222222;
-        border-radius: 10px 10px 0 0;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        color: #ffffff !important;
-        font-weight: 600;
-    }
-    
-    p, li, h4, h3, h2, h1 {
-        color: #ffffff !important;
-    }
-    
-    .stSelectbox div[data-baseweb="select"] {
-        background-color: #222222;
-        color: white;
-        border: 2px solid #006400;
     }
     
     .dataframe th {
@@ -149,15 +125,13 @@ st.markdown("""
         background-color: #222222 !important;
         color: white !important;
     }
-    
-    .stPlotlyChart {
-        background-color: transparent !important;
-    }
 </style>
 """, unsafe_allow_html=True)
 
+# Title section
 st.markdown('<div class="research-title">RESEARCH: Urban Climate Patterns Analysis<br><span style="font-size: 20px; color: #90ee90;">A Computational Approach to Urban Microclimate Variability</span></div>', unsafe_allow_html=True)
 
+# Abstract section
 st.markdown('<h2 class="section-header">Abstract</h2>', unsafe_allow_html=True)
 
 col1, col2 = st.columns([2, 1])
@@ -187,6 +161,7 @@ with col2:
     </div>
     """, unsafe_allow_html=True)
 
+# Methodology section
 st.markdown('<h2 class="section-header">Methodology & Data Collection</h2>', unsafe_allow_html=True)
 
 method_col1, method_col2 = st.columns(2)
@@ -216,11 +191,12 @@ with method_col2:
         <li><b>Temporal Analysis:</b> Monthly trend identification</li>
         <li><b>Correlation Analysis:</b> Parameter relationships</li>
     </ol>
-    <p><b>Tools:</b> Python, Pandas, NumPy, Matplotlib, Streamlit</p>
+    <p><b>Tools:</b> Python, Pandas, NumPy, Streamlit</p>
     <p><b>Ethical Considerations:</b> Simulated data for research demonstration</p>
     </div>
     """, unsafe_allow_html=True)
 
+# Research Dataset section
 st.markdown('<h2 class="section-header">Research Dataset</h2>', unsafe_allow_html=True)
 
 st.markdown('<div class="subsection-header">Study Cities & Sampling Parameters</div>', unsafe_allow_html=True)
@@ -236,6 +212,7 @@ study_cities = [
 cities_df = pd.DataFrame(study_cities)
 st.dataframe(cities_df.style.set_properties(**{'background-color': '#222222', 'color': 'white'}), use_container_width=True)
 
+# Generate research data
 np.random.seed(42)
 months = ['January', 'February', 'March', 'April', 'May', 'June']
 
@@ -290,6 +267,7 @@ with col3:
 with col4:
     st.markdown('<div class="data-point">Variables<br><b>8</b></div>', unsafe_allow_html=True)
 
+# Data Analysis section
 st.markdown('<h2 class="section-header">Data Analysis & Findings</h2>', unsafe_allow_html=True)
 
 st.markdown('<div class="subsection-header">Analysis Parameters</div>', unsafe_allow_html=True)
@@ -325,7 +303,7 @@ analysis_df = research_df[research_df['City'].isin(cities_to_compare)]
 
 st.markdown('<div class="subsection-header">Research Findings</div>', unsafe_allow_html=True)
 
-results_tab1, results_tab2, results_tab3 = st.tabs(["Statistical Results", "Visual Analysis", "Research Interpretation"])
+results_tab1, results_tab2 = st.tabs(["Statistical Results", "Research Interpretation"])
 
 with results_tab1:
     st.write(f"### Statistical Analysis: {analysis_focus}")
@@ -367,66 +345,6 @@ with results_tab1:
         """, unsafe_allow_html=True)
 
 with results_tab2:
-    st.write("### Visual Analysis of Climate Patterns")
-    
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
-    
-    fig.patch.set_facecolor('#000000')
-    ax1.set_facecolor('#222222')
-    ax2.set_facecolor('#222222')
-    
-    plt.rcParams['axes.facecolor'] = '#222222'
-    plt.rcParams['figure.facecolor'] = '#000000'
-    plt.rcParams['axes.labelcolor'] = 'white'
-    plt.rcParams['axes.titlecolor'] = 'white'
-    plt.rcParams['xtick.color'] = 'white'
-    plt.rcParams['ytick.color'] = 'white'
-    
-    monthly_avg = analysis_df.groupby(['Month_Index', 'City'])['Temperature (°C)'].mean().unstack()
-    monthly_avg.plot(ax=ax1, marker='o', linewidth=2)
-    ax1.set_xlabel('Month (1=Jan, 6=Jun)', color='white')
-    ax1.set_ylabel('Temperature (°C)', color='white')
-    ax1.set_title('Monthly Temperature Trends by City', color='white')
-    ax1.grid(True, alpha=0.3, color='gray')
-    ax1.legend(title='City', bbox_to_anchor=(1.05, 1), loc='upper left', facecolor='#222222', edgecolor='white', labelcolor='white')
-    ax1.tick_params(colors='white')
-    
-    if analysis_focus == "Temperature Patterns":
-        city_means = analysis_df.groupby('City')['Temperature (°C)'].mean().sort_values()
-        bars = ax2.bar(city_means.index, city_means.values, color=['#32cd32', '#00ff7f', '#00bfff', '#9370db', '#ff69b4'])
-        ax2.set_xlabel('City', color='white')
-        ax2.set_ylabel('Average Temperature (°C)', color='white')
-        ax2.set_title('Average Temperature Comparison', color='white')
-        ax2.tick_params(axis='x', rotation=45, colors='white')
-        ax2.tick_params(axis='y', colors='white')
-        
-        for bar in bars:
-            height = bar.get_height()
-            ax2.text(bar.get_x() + bar.get_width()/2., height,
-                    f'{height:.1f}°C', ha='center', va='bottom', color='white', fontweight='bold')
-        
-    elif analysis_focus == "Urban vs Coastal Comparison":
-        coastal_data = analysis_df[analysis_df['Coastal'] == 'Yes']['Temperature (°C)']
-        urban_data = analysis_df[analysis_df['Coastal'] == 'No']['Temperature (°C)']
-        
-        data_to_plot = [coastal_data, urban_data]
-        bp = ax2.boxplot(data_to_plot, patch_artist=True)
-        
-        colors = ['#1e90ff', '#ff8c00']
-        for patch, color in zip(bp['boxes'], colors):
-            patch.set_facecolor(color)
-        
-        ax2.set_xticklabels(['Coastal Cities', 'Inland Cities'], color='white')
-        ax2.set_ylabel('Temperature (°C)', color='white')
-        ax2.set_title('Temperature Distribution: Coastal vs Inland', color='white')
-        ax2.grid(True, alpha=0.3, color='gray')
-    
-    plt.tight_layout()
-    st.pyplot(fig)
-    
-    st.markdown('<p class="citation">Figure 1: Visual analysis of climate patterns. Left: Temporal trends. Right: Comparative analysis.</p>', unsafe_allow_html=True)
-
-with results_tab3:
     st.write("### Research Interpretation & Discussion")
     
     st.markdown("""
@@ -434,7 +352,7 @@ with results_tab3:
     <h4 style="color: #32cd32;">Discussion of Findings</h4>
     
     <p><b>1. Urban Heat Island Effect Confirmation:</b><br>
-    Analysis reveals that densely populated urban centers (Johannesburg, Cape Town) maintain higher average temperatures compared to less dense cities (Pretoria, Port Elizabeth). This aligns with established urban heat island theory (Oke, 1982).</p>
+    Analysis reveals that densely populated urban centers (Johannesburg, Cape Town) maintain higher average temperatures compared to less dense cities (Pretoria, Port Elizabeth). This aligns with established urban heat island theory.</p>
     
     <p><b>2. Coastal Moderation Effect:</b><br>
     Coastal cities demonstrate temperature stability with smaller diurnal ranges, supporting the hypothesis that large water bodies moderate urban microclimates.</p>
@@ -452,6 +370,7 @@ with results_tab3:
     </div>
     """, unsafe_allow_html=True)
 
+# Conclusion section
 st.markdown('<h2 class="section-header">Conclusion & Research Implications</h2>', unsafe_allow_html=True)
 
 conclusion_col1, conclusion_col2 = st.columns(2)
@@ -511,6 +430,7 @@ with conclusion_col2:
     </div>
     """, unsafe_allow_html=True)
 
+# Output section
 st.markdown('<h2 class="section-header">Research Output & References</h2>', unsafe_allow_html=True)
 
 output_col1, output_col2 = st.columns([2, 1])
@@ -577,6 +497,7 @@ with output_col2:
     </div>
     """, unsafe_allow_html=True)
 
+# Footer
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #ffffff; padding: 25px; background: #111111; border-radius: 15px; border: 2px solid #006400;">
