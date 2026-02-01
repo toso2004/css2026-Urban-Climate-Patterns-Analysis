@@ -2,13 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Set page configuration
 st.set_page_config(
     page_title="Urban Climate Research Dashboard",
     layout="wide"
 )
 
-# Clean styling with black background
 st.markdown("""
 <style>
     .stApp {
@@ -510,3 +508,4 @@ st.markdown("""
 
 if st.button("Start New Analysis Session", use_container_width=True):
     st.rerun()
+
